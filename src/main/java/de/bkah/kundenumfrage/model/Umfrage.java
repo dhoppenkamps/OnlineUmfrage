@@ -6,14 +6,23 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import de.bkah.kundenumfrage.email.EMailService;
+
 @ManagedBean(name="umfrageBean")
 @SessionScoped
 public class Umfrage implements Serializable
 {
-
+	// -----------------
+	// Attributes
+	// -----------------
+	
 	private static final long serialVersionUID = 1L;
 	
 	private String msg;
+	
+	// -----------------
+	// Constructors
+	// -----------------
 	
 	@PostConstruct
 	public void init()
@@ -21,6 +30,10 @@ public class Umfrage implements Serializable
 		msg = "Hello World!";
 	}
 
+	// -----------------
+	// Getter / Setter
+	// -----------------
+	
 	public String getMsg() {
 		return msg;
 	}
@@ -29,4 +42,24 @@ public class Umfrage implements Serializable
 		this.msg = msg;
 	}
 	
+	// -----------------
+	// business logic
+	// -----------------
+	
+	public String sendMail()
+	{
+		// TODO Replace System.out with logging!
+		
+		System.out.println("Umfrage.java | sendMail() aufgerufen");
+		EMailService mailService = new EMailService();
+		String to 		= "test1@localhost";
+		String from 	= "admin@localhost";
+		String subject 	= "Testing Mail-Service...";
+		String body 	= "If you receive this, Mail-Service is working";
+		
+		mailService.setHost("localhost");
+		mailService.sendMail(to, from, subject, body);
+		
+		return null;
+	}
 }

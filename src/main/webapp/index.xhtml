@@ -5,11 +5,16 @@
       xmlns:f="http://java.sun.com/jsf/core"      
       xmlns:h="http://java.sun.com/jsf/html">
  
-    <h:head>
-        <title>JSF 2.0 Hello World</title>
-    </h:head>
-    <h:body>
-    	<h1>JSF 2.0 Hello World Example</h1>
-    	HelloBean says <h:outputText value="#{umfrageBean.msg}" />
-    </h:body>
+<h:head>
+    <title>Online-Kundenumfrage</title>
+</h:head>
+<h:body>
+	<h1>Online-Kundenumfrage der HardSys GmbH</h1>
+	
+	<h:form>
+		<h:commandButton value="Send Mail" action="#{umfrageBean.sendMail}" />
+	</h:form>
+	
+	
+</h:body>
 </html>
