@@ -1,13 +1,17 @@
 package de.bkah.kundenumfrage.model;
 
 import java.io.Serializable;
+import java.sql.SQLException;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.mail.MessagingException;
 
+import org.apache.log4j.Logger;
+
 import de.bkah.kundenumfrage.email.EMailService;
+import de.bkah.kundenumfrage.persistence.UmfrageDB;
 
 /**
  * 
@@ -25,6 +29,8 @@ public class Umfrage implements Serializable
 	private static final long serialVersionUID = 1L;
 	
 	private String msg;
+	
+	private static final Logger LOGGER = Logger.getLogger(Umfrage.class);
 	
 	// -----------------
 	// Constructors
@@ -54,9 +60,9 @@ public class Umfrage implements Serializable
 	
 	public String sendMail() throws MessagingException
 	{
-		// TODO Replace System.out with logging!
-		
-		System.out.println("Umfrage.java | sendMail() aufgerufen");
+		if(LOGGER.isDebugEnabled())
+			LOGGER.debug("sendMail() aufgerufen");
+			
 		EMailService mailService = new EMailService();
 		String to 		= "test1@localhost";
 		String from 	= "admin@localhost";
@@ -66,6 +72,14 @@ public class Umfrage implements Serializable
 		mailService.setHost("localhost");
 		mailService.sendMail(to, from, subject, body);
 		
+		return null;
+	}
+	
+	public String test() throws SQLException, ReflectiveOperationException
+	{
+		UmfrageDB db = new UmfrageDB();
+		db.connect();
+		db.disconnect();
 		return null;
 	}
 }

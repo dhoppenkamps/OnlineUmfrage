@@ -10,6 +10,8 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import org.apache.log4j.Logger;
+
 /**
  * Diese Klasse implementiert einen E-Mail-Service, der Mails über einen SMTP-Server verschickt. 
  * 
@@ -26,6 +28,8 @@ public class EMailService
 	// -----------------
 	
 	private String host;
+	
+	private static final Logger LOGGER = Logger.getLogger(EMailService.class);
 
 	// -----------------
 	// Constructors
@@ -58,8 +62,8 @@ public class EMailService
 	
 	public void sendMail(final String to, final String from, final String subject, final String body) throws MessagingException
 	{
-		// TODO Replace System.out with logging!
-		System.out.println("EMailService.java | sendMail() aufgerufen");
+		if(LOGGER.isDebugEnabled())
+			LOGGER.debug("EMailService.java | sendMail() aufgerufen");
 		
 		Properties props = new Properties();
 		// Setup mail server
@@ -77,15 +81,12 @@ public class EMailService
             msg.setSubject(subject);
             msg.setText(body);
             Transport.send(msg);
-        } catch (AddressException e) {
-        	System.out.println("EMailService.java | "+ e);
+        } catch(MessagingException e) {
+        	LOGGER.error("Fehler beim Versenden der EMail.", e);
         	throw e;
-        } catch (MessagingException e) {
-        	System.out.println("EMailService.java | "+ e);
+        } catch(Exception e) {
+        	LOGGER.error("Fehler beim Versenden der EMail.", e);
         	throw e;
-		} catch (Exception e){
-			// TODO remove
-			System.out.println("EMailService.java | "+ e);
-		}
+        }
 	}
 }

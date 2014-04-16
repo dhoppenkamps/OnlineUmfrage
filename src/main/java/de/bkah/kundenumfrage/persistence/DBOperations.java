@@ -10,6 +10,8 @@ import java.sql.ResultSet;
  */
 public class DBOperations {
 	
+	private static final UmfrageDB DB = new UmfrageDB();
+	
 	public static void insertUmfrage() {
 		// TODO implement
 	}
