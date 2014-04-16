@@ -10,13 +10,21 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-
+/**
+ * Diese Klasse implementiert einen E-Mail-Service, der Mails über einen SMTP-Server verschickt. 
+ * 
+ * Der SMTP Host muss zwingend übergeben werden, sonst ist die Klasse nicht funktionsfähig.
+ * 
+ * @author Dominik Hoppenkamps
+ *
+ */
 public class EMailService 
 {
 	
 	// -----------------
 	// Attributes
 	// -----------------
+	
 	private String host;
 
 	// -----------------
@@ -48,7 +56,7 @@ public class EMailService
 	// business logic
 	// -----------------
 	
-	public void sendMail(final String to, final String from, final String subject, final String body)
+	public void sendMail(final String to, final String from, final String subject, final String body) throws MessagingException
 	{
 		// TODO Replace System.out with logging!
 		System.out.println("EMailService.java | sendMail() aufgerufen");
@@ -71,8 +79,10 @@ public class EMailService
             Transport.send(msg);
         } catch (AddressException e) {
         	System.out.println("EMailService.java | "+ e);
+        	throw e;
         } catch (MessagingException e) {
         	System.out.println("EMailService.java | "+ e);
+        	throw e;
 		} catch (Exception e){
 			// TODO remove
 			System.out.println("EMailService.java | "+ e);

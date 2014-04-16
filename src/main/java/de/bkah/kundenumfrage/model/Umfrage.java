@@ -4,12 +4,18 @@ import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
+import javax.mail.MessagingException;
 
 import de.bkah.kundenumfrage.email.EMailService;
 
+/**
+ * 
+ * @author Dominik Hoppenkamps
+ *
+ */
 @ManagedBean(name="umfrageBean")
-@SessionScoped
+@RequestScoped
 public class Umfrage implements Serializable
 {
 	// -----------------
@@ -46,7 +52,7 @@ public class Umfrage implements Serializable
 	// business logic
 	// -----------------
 	
-	public String sendMail()
+	public String sendMail() throws MessagingException
 	{
 		// TODO Replace System.out with logging!
 		
