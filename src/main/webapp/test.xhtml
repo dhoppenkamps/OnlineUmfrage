@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"      
+      xmlns:h="http://java.sun.com/jsf/html">
+ 
+<h:head>
+    <title>Online-Kundenumfrage</title>
+</h:head>
+<h:body>
+	<h1>test DBOperations</h1>
+	
+	<h:form>
+		<h:commandButton value="Send Mail" action="#{testBean.testSendMail}" /> <br />
+		<h:commandButton value="hasParticipated()" action="#{testBean.testHasParticipated}" /> #{testBean.hasParticipated} <br />
+		<h:commandButton value="mayParticipate()" action="#{testBean.testMayParticipate}" /> #{testBean.mayParticipate} <br />
+		<h:commandButton value="inserAntwort()" action="#{testBean.testInsertAntwort}" /> <br />
+		<h:commandButton value="insertUmfrage()" action="#{testBean.testInsertUmfrage}" /> <br />
+		<h:commandButton value="insertToken()" action="#{testBean.testInsertToken}" /> <br />
+		<h:commandButton value="selectErgebnis()" action="#{testBean.testSelectErgebnis}" /> #{testBean.ergebnis} <br />
+		<h:commandButton value="selectKunde()" action="#{testBean.testSelectKunde}" /> #{testBean.kunde} <br />
+		<h:commandButton value="selectKunden()" action="#{testBean.testSelectKunden}" /> #{testBean.kunden} <br />
+	</h:form>
+	
+	
+</h:body>
+</html>

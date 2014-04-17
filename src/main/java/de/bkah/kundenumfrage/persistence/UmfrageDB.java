@@ -35,6 +35,11 @@ public class UmfrageDB
 		password = "umfrage";
 	}
 	
+	protected Connection getConnection() throws SQLException, ReflectiveOperationException
+	{
+		return conn;
+	}
+	
 	/**
 	 * Stellt die Verbindung zur Datenbank her.
 	 * 
@@ -106,9 +111,6 @@ public class UmfrageDB
 		} catch(SQLException e) {
 			LOGGER.error("Fehler beim Ausühren des Statements.", e);
 			throw e;
-		} finally {
-			stmt.close();
-			this.disconnect();
 		}
 		
 		return rs;

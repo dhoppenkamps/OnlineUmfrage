@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 16. Apr 2014 um 02:18
+-- Erstellungszeit: 17. Apr 2014 um 16:57
 -- Server Version: 5.6.16
 -- PHP-Version: 5.5.9
 
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `antworten` (
   PRIMARY KEY (`ID_Antwort`),
   UNIQUE KEY `ID_Antwort` (`ID_Antwort`),
   KEY `ID_Umfrage` (`ID_Umfrage`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 -- --------------------------------------------------------
 
@@ -52,7 +52,15 @@ CREATE TABLE IF NOT EXISTS `kunde` (
   `Email` varchar(255) NOT NULL,
   PRIMARY KEY (`ID_Kunde`),
   UNIQUE KEY `ID_Kunde` (`ID_Kunde`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Daten für Tabelle `kunde`
+--
+
+INSERT INTO `kunde` (`ID_Kunde`, `Vorname`, `Nachname`, `Email`) VALUES
+(1, 'Roy', 'Bär', 'test1@localhost'),
+(2, 'Clara', 'Fall', 'test2@localhost');
 
 -- --------------------------------------------------------
 
@@ -64,6 +72,7 @@ CREATE TABLE IF NOT EXISTS `token` (
   `Token` varchar(255) NOT NULL,
   `ID_Umfrage` bigint(20) NOT NULL,
   `ID_Kunde` bigint(20) NOT NULL,
+  `benutzt` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`Token`),
   KEY `ID_Umfrage` (`ID_Umfrage`),
   KEY `ID_Kunde` (`ID_Kunde`)
@@ -78,33 +87,16 @@ CREATE TABLE IF NOT EXISTS `token` (
 CREATE TABLE IF NOT EXISTS `umfrage` (
   `ID_Umfrage` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `Titel` varchar(255) NOT NULL,
-  `Frage1` int(255) NOT NULL,
-  `Frage2` int(255) NOT NULL,
-  `Frage3` int(255) NOT NULL,
-  `Frage4` int(255) NOT NULL,
-  `Frage5` int(255) NOT NULL,
+  `Frage1` varchar(255) NOT NULL,
+  `Frage2` varchar(255) NOT NULL,
+  `Frage3` varchar(255) NOT NULL,
+  `Frage4` varchar(255) NOT NULL,
+  `Frage5` varchar(255) NOT NULL,
   `Beginn` date NOT NULL,
   `Ende` date NOT NULL,
-  `Stimmen` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID_Umfrage`),
   UNIQUE KEY `ID_Umfrage` (`ID_Umfrage`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Tabellenstruktur für Tabelle `umfrage_x_token`
---
-
-CREATE TABLE IF NOT EXISTS `umfrage_x_token` (
-  `ID_Teilnahme` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `Token` varchar(255) NOT NULL,
-  `ID_Umfrage` bigint(20) NOT NULL,
-  PRIMARY KEY (`ID_Teilnahme`),
-  UNIQUE KEY `ID_Teilnahme` (`ID_Teilnahme`),
-  KEY `Token` (`Token`,`ID_Umfrage`),
-  KEY `ID_Umfrage` (`ID_Umfrage`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
