@@ -85,6 +85,7 @@ public class UmfrageBean implements Serializable
 		return null;
 	}
 	
+	/*
 	public String test() throws SQLException, ReflectiveOperationException
 	{
 		// TODO remove
@@ -112,5 +113,5 @@ public class UmfrageBean implements Serializable
 		//msg = "";
 		DBOperations.insertUmfrage(u);
 		return null;
-	}
+	}*/
 }
