@@ -2,7 +2,9 @@ package de.bkah.kundenumfrage.model;
 
 import java.io.Serializable;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -65,24 +67,31 @@ public class UmfrageBean implements Serializable
 	 * 
 	 * @return Zielseite. (null = reload der aktuellen Seite)
 	 * @throws MessagingException
+	 * @throws SQLException 
+	 * @throws ReflectiveOperationException 
 	 */
-	public String sendMail() throws MessagingException
+	public String sendMail() throws MessagingException, ReflectiveOperationException, SQLException
 	{
-		// TODO implement
+		List<Kunde> kundenstamm = DBOperations.selectKunden();
 		
 		if(LOGGER.isDebugEnabled())
 			LOGGER.debug("sendMail() aufgerufen");
 			
 		EMailService mailService = new EMailService();
-		String to 		= "test1@localhost";
-		String from 	= "admin@localhost";
-		String subject 	= "Testing Mail-Service...";
-		String body 	= "If you receive this, Mail-Service is working";
-		
 		mailService.setHost("localhost");
-		mailService.sendMail(to, from, subject, body);
+		String link 	= "";
+		String subject 	= "Online-Umfrage";
+		String body 	= "Hallo,\n\nBitte nehmen Sie sich einen Moment Zeit und bewerten Sie uns!\n\n"+ link;
 		
-		return null;
+		for(int i = 0; i < kundenstamm.size(); i++) 
+		{
+			String to 		= kundenstamm.get(i).getEmail();
+			String from 	= "admin@localhost";
+			
+			mailService.sendMail(to, from, subject, body);
+		}
+		
+		return "/success.xhtml";
 	}
 	
 	/*
