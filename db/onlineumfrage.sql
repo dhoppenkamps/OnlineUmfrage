@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 17. Apr 2014 um 16:57
+-- Erstellungszeit: 12. Jun 2014 um 14:17
 -- Server Version: 5.6.16
 -- PHP-Version: 5.5.9
 
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `antworten` (
   PRIMARY KEY (`ID_Antwort`),
   UNIQUE KEY `ID_Antwort` (`ID_Antwort`),
   KEY `ID_Umfrage` (`ID_Umfrage`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 -- --------------------------------------------------------
 
@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS `kunde` (
 
 INSERT INTO `kunde` (`ID_Kunde`, `Vorname`, `Nachname`, `Email`) VALUES
 (1, 'Roy', 'Bär', 'test1@localhost'),
-(2, 'Clara', 'Fall', 'test2@localhost');
+(2, 'Klara', 'Fall', 'test2@localhost');
 
 -- --------------------------------------------------------
 
@@ -77,6 +77,14 @@ CREATE TABLE IF NOT EXISTS `token` (
   KEY `ID_Umfrage` (`ID_Umfrage`),
   KEY `ID_Kunde` (`ID_Kunde`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Daten für Tabelle `token`
+--
+
+INSERT INTO `token` (`Token`, `ID_Umfrage`, `ID_Kunde`, `benutzt`) VALUES
+('tkn1', 1, 1, 0),
+('tkn2', 1, 2, 0);
 
 -- --------------------------------------------------------
 
@@ -96,7 +104,14 @@ CREATE TABLE IF NOT EXISTS `umfrage` (
   `Ende` date NOT NULL,
   PRIMARY KEY (`ID_Umfrage`),
   UNIQUE KEY `ID_Umfrage` (`ID_Umfrage`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Daten für Tabelle `umfrage`
+--
+
+INSERT INTO `umfrage` (`ID_Umfrage`, `Titel`, `Frage1`, `Frage2`, `Frage3`, `Frage4`, `Frage5`, `Beginn`, `Ende`) VALUES
+(1, 'Umfrage', 'Wie zufrieden sind Sie mit der Qualität des Produktes?', 'Wie zufrieden sind Sie mit der Lieferdauer?', 'Wie zufrieden sind Sie mit der Preis / Leistung unserer Waren?', 'Wie zufrieden sind Sie mit dem Service / Unserem Reparatur Dienst?', 'Wie zufrieden sind Sie mit dem angebotenen Sortiment?', '0000-00-00', '0000-00-00');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

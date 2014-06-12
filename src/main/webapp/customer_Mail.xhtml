@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"      
+      xmlns:h="http://java.sun.com/jsf/html">
+
+<head>
+  <title>Kundenumfrage HardSys</title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" type="text/css" href="/kundenumfrage/resources/css/style.css" />
+  <script type="text/javascript" src="/kundenumfrage/resources/js/jquery.min.js"></script>
+  <script type="text/javascript" src="/kundenumfrage/resources/js/jquery.easing.min.js"></script>
+  <script type="text/javascript" src="/kundenumfrage/resources/js/jquery.nivo.slider.pack.js"></script>
+  <script type="text/javascript" src="/kundenumfrage/resources/js/jquery.nivo.slider.pack.js"></script>
+  <script type="text/javascript">
+    $(window).load(function() {
+        $('#slider').nivoSlider();
+    });
+   </script>
+</head>
+
+
+<body>
+  <div id="main">	
+	<div id="site_content">        	  
+	  <div id="banner_image">
+	    <div id="slider-wrapper">        
+          <div id="slider" class="nivoSlider">
+            <img src="/kundenumfrage/resources/images/slide1.jpg" alt=""/>
+            <img src="/kundenumfrage/resources/images/slide2.jpg" alt=""/>
+		  </div>
+		</div>
+	  </div>		  
+      <div id="content">
+        <div class="content_item">
+          <h1>Willkommen zur Kundenumfrage der HardSys GmbH</h1>
+			<br /><br />
+            <p>Vielen Dank, dass sie sich einen kurzen Augenblick Zeit nehmen und an unserer Umfrage teilnehmen. <br />
+			Jedes Umfrageergebnis hilft unseren Service und die Qualität unserer Produkte zu verbessern.</p>
+			<br />
+			<p>Sämtliche Informationen werden lediglich für eine statistische Auswertung genutzt.</p> <br />			
+			<p>Wie zufrieden sind Sie mit der Qualität des Produktes?</p>
+			<h:form>
+			<table>
+				<tr>
+					<!-- 
+					<td><input type="radio" name="qualitaet" value="1"> Ausgezeichnet</td>
+					<td><input type="radio" name="qualitaet" value="2"> Gut</td>
+					<td><input type="radio" name="qualitaet" value="3"> Befriedigend</td>
+					<td><input type="radio" name="qualitaet" value="4"> Ausreichend</td>
+					<td><input type="radio" name="qualitaet" value="5"> Mangelhaft</td>
+					-->
+					<h:selectOneRadio value="#{umfrageBean.antwort.antwort1}">
+   						<td> <f:selectItem itemValue="Ausgezeichnet" itemLabel="Ausgezeichnet" /> </td>
+   						<td> <f:selectItem itemValue="Gut" itemLabel="Gut" /> </td>
+   						<td> <f:selectItem itemValue="Befriedigend" itemLabel="Befriedigend" /> </td>
+   						<td> <f:selectItem itemValue="Ausreichend" itemLabel="Ausreichend" /> </td>
+   						<td> <f:selectItem itemValue="Mangelhaft" itemLabel="Mangelhaft" /> </td>
+   					</h:selectOneRadio>
+				</tr>
+			</table>
+			<br /><br /><br />			
+			<p>Wie zufrieden sind Sie mit der Lieferdauer?</p>
+			<table>
+				<tr>
+					<!-- 
+					<td><input type="radio" name="lieferdauer" value="1"> Ausgezeichnet</td>
+					<td><input type="radio" name="lieferdauer" value="2"> Gut</td>
+					<td><input type="radio" name="lieferdauer" value="3"> Befriedigend</td>
+					<td><input type="radio" name="lieferdauer" value="4"> Ausreichend</td>
+					<td><input type="radio" name="lieferdauer" value="5"> Mangelhaft</td>
+					-->
+					<h:selectOneRadio value="#{umfrageBean.antwort.antwort2}">
+   						<td> <f:selectItem itemValue="Ausgezeichnet" itemLabel="Ausgezeichnet" /> </td>
+   						<td> <f:selectItem itemValue="Gut" itemLabel="Gut" /> </td>
+   						<td> <f:selectItem itemValue="Befriedigend" itemLabel="Befriedigend" /> </td>
+   						<td> <f:selectItem itemValue="Ausreichend" itemLabel="Ausreichend" /> </td>
+   						<td> <f:selectItem itemValue="Mangelhaft" itemLabel="Mangelhaft" /> </td>
+   					</h:selectOneRadio>
+				</tr>
+			</table>
+			<br /><br /><br />
+			
+			<p>Wie zufrieden sind Sie mit der Preis / Leistung unserer Waren?</p>
+			<table>
+				<tr>
+					<!-- 
+					<td><input type="radio" name="preis" value="1"> Ausgezeichnet</td>
+					<td><input type="radio" name="preis" value="2"> Gut</td>
+					<td><input type="radio" name="preis" value="3"> Befriedigend</td>
+					<td><input type="radio" name="preis" value="4"> Ausreichend</td>
+					<td><input type="radio" name="preis" value="5"> Mangelhaft</td>
+					-->
+					<h:selectOneRadio value="#{umfrageBean.antwort.antwort3}">
+   						<td> <f:selectItem itemValue="Ausgezeichnet" itemLabel="Ausgezeichnet" /> </td>
+   						<td> <f:selectItem itemValue="Gut" itemLabel="Gut" /> </td>
+   						<td> <f:selectItem itemValue="Befriedigend" itemLabel="Befriedigend" /> </td>
+   						<td> <f:selectItem itemValue="Ausreichend" itemLabel="Ausreichend" /> </td>
+   						<td> <f:selectItem itemValue="Mangelhaft" itemLabel="Mangelhaft" /> </td>
+   					</h:selectOneRadio>
+				</tr>
+			</table>
+			<br /><br /><br />
+			
+			<p>Wie zufrieden sind Sie mit dem Service / Unserem Reparatur Dienst?</p>
+			<table>
+				<tr>
+					<!-- 
+					<td><input type="radio" name="service" value="1"> Ausgezeichnet</td>
+					<td><input type="radio" name="service" value="2"> Gut</td>
+					<td><input type="radio" name="service" value="3"> Befriedigend</td>
+					<td><input type="radio" name="service" value="4"> Mangelhaft</td>
+					<td><input type="radio" name="service" value="5"> Trifft nicht zu</td>
+					-->
+					<h:selectOneRadio value="#{umfrageBean.antwort.antwort4}">
+   						<td> <f:selectItem itemValue="Ausgezeichnet" itemLabel="Ausgezeichnet" /> </td>
+   						<td> <f:selectItem itemValue="Gut" itemLabel="Gut" /> </td>
+   						<td> <f:selectItem itemValue="Befriedigend" itemLabel="Befriedigend" /> </td>
+   						<td> <f:selectItem itemValue="Ausreichend" itemLabel="Ausreichend" /> </td>
+   						<td> <f:selectItem itemValue="Mangelhaft" itemLabel="Mangelhaft" /> </td>
+   					</h:selectOneRadio>
+				</tr>
+			</table>
+			<br /><br /><br />
+			
+			<p>Wie zufrieden sind Sie mit dem angebotenen Sortiment?</p>
+			<table>
+				<tr>
+					<!-- 
+					<td><input type="radio" name="sortiment" value="1"> Ausgezeichnet</td>
+					<td><input type="radio" name="sortiment" value="2"> Gut</td>
+					<td><input type="radio" name="sortiment" value="3"> Befriedigend</td>
+					<td><input type="radio" name="sortiment" value="4"> Ausreichend</td>
+					<td><input type="radio" name="sortiment" value="5"> Mangelhaft</td>
+					-->
+					
+					<h:selectOneRadio value="#{umfrageBean.antwort.antwort5}">
+   						<td> <f:selectItem itemValue="Ausgezeichnet" itemLabel="Ausgezeichnet" /> </td>
+   						<td> <f:selectItem itemValue="Gut" itemLabel="Gut" /> </td>
+   						<td> <f:selectItem itemValue="Befriedigend" itemLabel="Befriedigend" /> </td>
+   						<td> <f:selectItem itemValue="Ausreichend" itemLabel="Ausreichend" /> </td>
+   						<td> <f:selectItem itemValue="Mangelhaft" itemLabel="Mangelhaft" /> </td>
+   					</h:selectOneRadio>
+				</tr>
+			</table>
+			<br /><br /><br />			
+			<div id="send_button"> 
+				<!-- <input type="button" name="send" value="Ergebnisse abschicken" onclick="parent.location='done.html'"> -->
+				<h:commandButton value="Ergebnisse abschicken" action="#{umfrageBean.saveAntworten}" />
+			</div>			
+			</h:form>
+		</div>		      
+		<div class="sidebar_container">   		  
+		  <div class="sidebar">
+            <div style="padding-left:17%" class="sidebar_item">
+                <h1>Unsere Marken</h1>
+			    <h4 ><img style="width: 140px; padding-top: 20px" src="/kundenumfrage/resources/images/content_side/asus.png"/></h4>
+                <h4 ><img style="width: 140px;" src="/kundenumfrage/resources/images/content_side/intel.png"/></h4>
+                <h4 ><img style="width: 140px;" src="/kundenumfrage/resources/images/content_side/vaio.png"/></h4>
+                <h4 ><img style="width: 140px;" src="/kundenumfrage/resources/images/content_side/samsung.png"/></h4>
+                <h4 ><img style="width: 140px;" src="/kundenumfrage/resources/images/content_side/gigabyte.png"/></h4>
+                <p></p>
+              </div>         
+          </div>
+        </div>	
+       <br style="clear:both;"/>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

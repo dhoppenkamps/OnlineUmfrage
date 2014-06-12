@@ -2,20 +2,18 @@ package de.bkah.kundenumfrage.model;
 
 import java.io.Serializable;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.mail.MessagingException;
 
 import org.apache.log4j.Logger;
 
 import de.bkah.kundenumfrage.email.EMailService;
 import de.bkah.kundenumfrage.persistence.DBOperations;
-import de.bkah.kundenumfrage.persistence.UmfrageDB;
 
 /**
  * 
@@ -32,8 +30,7 @@ public class UmfrageBean implements Serializable
 	
 	private static final long serialVersionUID = 1L;
 	
-	private String msg;
-	
+	private Antwort antwort;
 	private static final Logger LOGGER = Logger.getLogger(UmfrageBean.class);
 	
 	// -----------------
@@ -43,19 +40,24 @@ public class UmfrageBean implements Serializable
 	@PostConstruct
 	public void init()
 	{
-		msg = "Hello World!";
+		FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+		
+		antwort = new Antwort();
+		Umfrage umfrage = new Umfrage();
+		umfrage.setId(1);
+		antwort.setUmfrage(umfrage);
 	}
 
 	// -----------------
 	// Getter / Setter
 	// -----------------
 	
-	public String getMsg() {
-		return msg;
+	public Antwort getAntwort() {
+		return antwort;
 	}
 
-	public void setMsg(String msg) {
-		this.msg = msg;
+	public void setAntwort(Antwort antwort) {
+		this.antwort = antwort;
 	}
 	
 	// -----------------
@@ -79,9 +81,9 @@ public class UmfrageBean implements Serializable
 			
 		EMailService mailService = new EMailService();
 		mailService.setHost("localhost");
-		String link 	= "";
+		String link 	= "http://localhost:8080/kundenumfrage/customer_Mail.xhtml";
 		String subject 	= "Online-Umfrage";
-		String body 	= "Hallo,\n\nBitte nehmen Sie sich einen Moment Zeit und bewerten Sie uns!\n\n"+ link;
+		String body 	= "Hallo,\n\nBitte nehmen Sie sich einen Moment Zeit und bewerten Sie uns!\n\nHier gehts zur Umfrage: "+ link +" \n\nVielen Dank!";
 		
 		for(int i = 0; i < kundenstamm.size(); i++) 
 		{
@@ -94,33 +96,21 @@ public class UmfrageBean implements Serializable
 		return "/success.xhtml";
 	}
 	
-	/*
-	public String test() throws SQLException, ReflectiveOperationException
+	/**
+	 * JSF action method. Speichert die Stimmabgaben eines Teilnehmers ab.
+	 * 
+	 * @return Zielseite. (null = reload der aktuellen Seite)
+	 * @throws SQLException 
+	 * @throws ReflectiveOperationException 
+	 */
+	public String saveAntworten() throws ReflectiveOperationException, SQLException 
 	{
-		// TODO remove
-		
-		UmfrageDB db = new UmfrageDB();
-		Umfrage u = new Umfrage();
-		Kunde k = new Kunde();
-		k.setId(1);
-		u.setId(1);
-		u.setTitel("Test-Umfrage");
-		u.setFrage1("frage1");
-		u.setFrage2("frage2");
-		u.setFrage3("frage3");
-		u.setFrage4("frage4");
-		u.setFrage5("frage5");
-		u.setBeginn(new java.sql.Date((new java.util.Date()).getTime()));
-		u.setEnde(new java.sql.Date((new java.util.Date()).getTime()));
-		Antwort a = new Antwort();
-		a.setUmfrage(u);
-		a.setAntwort1("antwort1");
-		a.setAntwort2("antwort2");
-		a.setAntwort3("antwort3");
-		a.setAntwort4("antwort4");
-		a.setAntwort5("antwort5");
-		//msg = "";
-		DBOperations.insertUmfrage(u);
-		return null;
-	}*/
+		try {
+		DBOperations.insertAntwort(antwort);
+		} catch(Exception e) {
+			LOGGER.error("Fehler beim Speichern der Antwort.", e);
+			throw e;
+		}
+		return "/customer_Done.xhtml";
+	}
 }
