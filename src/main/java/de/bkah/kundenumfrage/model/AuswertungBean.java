@@ -33,12 +33,6 @@ public class AuswertungBean implements Serializable {
 	
 	private static final Logger LOGGER = Logger.getLogger(AuswertungBean.class);
 	
-	private Map<Integer,Integer> antworten1;
-	private Map<Integer,Integer> antworten2;
-	private Map<Integer,Integer> antworten3;
-	private Map<Integer,Integer> antworten4;
-	private Map<Integer,Integer> antworten5;
-	
 	private List<Integer> antwortListe1;
 	private List<Integer> antwortListe2;
 	private List<Integer> antwortListe3;
@@ -52,9 +46,6 @@ public class AuswertungBean implements Serializable {
 	
 	@PostConstruct
 	public void init() {
-		FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-		
-		System.out.println("init() aufgerufen");
 		umfrage = new Umfrage();
 		umfrage.setId(1);
 		
@@ -69,9 +60,8 @@ public class AuswertungBean implements Serializable {
 			throw new RuntimeException("Fehler beim Laden des Umfrage-Ergebnisses", e);
 		}
 		
-//		this.initMaps();
-//		this.fillMaps();
-//		this.convertMapsToList();
+		this.initLists();
+		this.fillLists();
 	}
 	
 	// -----------------
@@ -138,89 +128,58 @@ public class AuswertungBean implements Serializable {
 	// business logic
 	// -----------------
 
-	/*
-	private void convertMapsToList(){
-		antwortListe1 =  new ArrayList<Integer>(antworten1.values());
-		antwortListe2 =  new ArrayList<Integer>(antworten2.values());
-		antwortListe3 =  new ArrayList<Integer>(antworten3.values());
-		antwortListe4 =  new ArrayList<Integer>(antworten4.values());
-		antwortListe5 =  new ArrayList<Integer>(antworten5.values());
-	}
-	
-	private void fillMaps() {
+	private void fillLists() {
 		Antwort antwort;
 		for(int i = 0; i < antworten.size(); i++) {
 			antwort = antworten.get(i);
 			
 			// Maps hochzählen für Antwort 1-5
-			System.out.println("Map 1: "+ antworten1.toString());
-			this.countAntwort(antworten1, antwort.getAntwort1());
-			this.countAntwort(antworten2, antwort.getAntwort2());
-			this.countAntwort(antworten3, antwort.getAntwort3());
-			this.countAntwort(antworten4, antwort.getAntwort4());
-			this.countAntwort(antworten5, antwort.getAntwort5());
+			antwortListe1 = this.countAntwort(antwortListe1, antwort.getAntwort1());
+			antwortListe2 = this.countAntwort(antwortListe2, antwort.getAntwort2());
+			antwortListe3 = this.countAntwort(antwortListe3, antwort.getAntwort3());
+			antwortListe4 = this.countAntwort(antwortListe4, antwort.getAntwort4());
+			antwortListe5 = this.countAntwort(antwortListe5, antwort.getAntwort5());
 		}
 	}
 	
-	private Map<Integer,Integer> countAntwort(Map<Integer,Integer> map, String antwort) {
+	private List<Integer> countAntwort(List<Integer> list, String antwort) {
+		List<Integer> newList = list;
 		switch(antwort) {
 		case "Ausgezeichnet": 
-			map.put(Integer.valueOf(1), map.get(Integer.valueOf(1))+1);
+			newList.set(0, list.get(0)+1);
 			break;
 		case "Gut":
-			map.put(Integer.valueOf(2), map.get(Integer.valueOf(2))+1);
+			newList.set(1, list.get(1)+1);
 			break;
 		case "Befriedigend":
-			map.put(Integer.valueOf(3), map.get(Integer.valueOf(3))+1);
+			newList.set(2, list.get(2)+1);
 			break;
 		case "Ausreichend":
-			map.put(Integer.valueOf(4), map.get(Integer.valueOf(4))+1);
+			newList.set(3, list.get(3)+1);
 			break;
 		case "Mangelhaft":
-			map.put(Integer.valueOf(5), map.get(Integer.valueOf(5))+1);
+			newList.set(4, list.get(4)+1);
 			break;
 		default: break;
 		}
 		
-		return map;
+		return newList;
 	}
 	
-	private void initMaps() {
-		antworten1 = MapUtils.putAll(new HashMap<Integer,Integer>(), new int[][] {
-		     {Integer.valueOf(1), Integer.valueOf(0)},
-		     {Integer.valueOf(2), Integer.valueOf(0)},
-		     {Integer.valueOf(3), Integer.valueOf(0)},
-		     {Integer.valueOf(4), Integer.valueOf(0)},
-		     {Integer.valueOf(5), Integer.valueOf(0)}
-		}); 
-		antworten2 = MapUtils.putAll(new HashMap<Integer,Integer>(), new int[][] {
-			{Integer.valueOf(1), Integer.valueOf(0)},
-		     {Integer.valueOf(2), Integer.valueOf(0)},
-		     {Integer.valueOf(3), Integer.valueOf(0)},
-		     {Integer.valueOf(4), Integer.valueOf(0)},
-		     {Integer.valueOf(5), Integer.valueOf(0)}
-		}); 
-		antworten3 = MapUtils.putAll(new HashMap<Integer,Integer>(), new int[][] {
-			{Integer.valueOf(1), Integer.valueOf(0)},
-		     {Integer.valueOf(2), Integer.valueOf(0)},
-		     {Integer.valueOf(3), Integer.valueOf(0)},
-		     {Integer.valueOf(4), Integer.valueOf(0)},
-		     {Integer.valueOf(5), Integer.valueOf(0)}
-		}); 
-		antworten4 = MapUtils.putAll(new HashMap<Integer,Integer>(), new int[][] {
-			{Integer.valueOf(1), Integer.valueOf(0)},
-		     {Integer.valueOf(2), Integer.valueOf(0)},
-		     {Integer.valueOf(3), Integer.valueOf(0)},
-		     {Integer.valueOf(4), Integer.valueOf(0)},
-		     {Integer.valueOf(5), Integer.valueOf(0)}
-		}); 
-		antworten5 = MapUtils.putAll(new HashMap<Integer,Integer>(), new int[][] {
-			{Integer.valueOf(1), Integer.valueOf(0)},
-		     {Integer.valueOf(2), Integer.valueOf(0)},
-		     {Integer.valueOf(3), Integer.valueOf(0)},
-		     {Integer.valueOf(4), Integer.valueOf(0)},
-		     {Integer.valueOf(5), Integer.valueOf(0)}
-		}); 
+	private void initLists() {
+		antwortListe1 =  initList();
+		antwortListe2 =  initList();
+		antwortListe3 =  initList();
+		antwortListe4 =  initList();
+		antwortListe5 =  initList();
 	}
-	*/
+	
+	private List<Integer> initList() {
+		List<Integer> initList = new ArrayList<Integer>();
+		for(int i = 0; i < 5; i++) {
+			initList.add(0);
+		}
+		
+		return initList;
+	}
 }
